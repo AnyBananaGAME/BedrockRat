@@ -2,14 +2,21 @@ const { createClient } = require('bedrock-protocol')
 const { EventEmitter } = require('events')
 const fs = require('fs')
 const config = require('./config.json')
+const cc = require("./types/index");
 
+
+
+/** @type {import('./types/index').BedrockRat}*/
 const client = createClient({
   host: config.host,
   port: config.port,
   offline: config.offline,
   username: config.username,
   version: config.version
-})
+});
+
+
+
 
 client.data = {
   position: { x: 0, y: 0, z: 0 },
