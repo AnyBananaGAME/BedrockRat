@@ -1,0 +1,15 @@
+{
+  "name": "bedrockrat",
+  "version": "1.0.0",
+  "description": "A minecraft bedrock bot that does things",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "keywords": [],
+  "author": "https://github.com/AnyBananaGAME",
+  "license": "ISC",
+  "dependencies": {
+    "bedrock-protocol": "^3.34.0"
+  }
+}
