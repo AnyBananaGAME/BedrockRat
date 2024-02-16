@@ -16,7 +16,6 @@ client.data = {
   runtime_entity_id: 0,
   tick: 0
 }
-let e = ''
 const libs = fs.readdirSync('./libs').filter(file => file.endsWith('js'));
 
 (async () => {
