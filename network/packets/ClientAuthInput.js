@@ -2,6 +2,7 @@ class ClientAuthInput {
   constructor (client, blockAction = undefined, blockPosition = undefined, final = false) {
     this.client = client
     this.block_action = blockAction
+    this.face = 3
 
     const x = blockPosition.x
     const y = blockPosition.y
@@ -10,11 +11,11 @@ class ClientAuthInput {
     const pos = this.client.data.position
 
     this.data = {
-      pitch: this.client.startGameData.rotation.x,
-      yaw: this.client.startGameData.rotation.z,
+      pitch: this.client.data.pitch,
+      yaw: this.client.data.yaw,
       position: { x: pos.x, y: pos.y, z: pos.z },
       move_vector: { x: 0, z: 0 },
-      head_yaw: this.client.startGameData.rotation.z,
+      head_yaw: this.client.data.yaw,
       input_data: {
         _value: 0,
         ascend: false,
@@ -88,7 +89,7 @@ class ClientAuthInput {
         data: {
           action_type: 'break_block',
           block_position: { x, y, z },
-          face: 3,
+          face: this.face,
           hotbar_slot: 0,
           held_item: { network_id: 0 },
           player_pos: pos,
