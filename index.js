@@ -20,11 +20,11 @@ client.data = {
   pitch: 0,
   debug: true
 }
-const libs = fs.readdirSync('./libs').filter(file => file.endsWith('js'));
+const libs = fs.readdirSync('./src/libs').filter(file => file.endsWith('js'));
 
 (async () => {
   for (const lib of libs) {
-    require('./libs/' + lib)(client)
+    require('./src/libs/' + lib)(client)
   }
 
   client.eventHandler()

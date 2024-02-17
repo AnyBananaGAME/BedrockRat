@@ -36,7 +36,7 @@ module.exports = (client) => {
           const actions3 = [{ action: 'stop_break' }, { action: 'crack_break', position: { x, y, z }, face: 2 }]
 
           const packet3 = new ClientAuthInput(client, actions3, position, true)
-          console.log(util.inspect(packet3.create(), { showHidden: false, depth: null, colors: true }))
+          client.queue("player_auth_input", packet3.create())
           await sleep(50)
           resolve()
         }

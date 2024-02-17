@@ -3,7 +3,7 @@ const fs = require('fs')
 /** @param {import("../../types/index").BedrockRat} client */
 module.exports = (client) => {
   client.eventHandler = async () => {
-    const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
+    const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'))
 
     for (const file of eventFiles) {
       /** @type {import("../../types/events/Event").Event} */
