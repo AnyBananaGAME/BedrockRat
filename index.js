@@ -27,7 +27,7 @@ const libs = fs.readdirSync('./libs').filter(file => file.endsWith('js'));
     require('./libs/' + lib)(client)
   }
 
-  client.eventHandler(); 
+  client.eventHandler()
 
   const ticker = new EventEmitter()
 
@@ -35,7 +35,7 @@ const libs = fs.readdirSync('./libs').filter(file => file.endsWith('js'));
     const pos = client.startGameData.player_position
     client.data.runtime_entity_id = client.startGameData.runtime_entity_id
     client.data.position = pos
-    console.log("Spawned in! at: ", pos)
+    console.log('Spawned in! at: ', pos)
     setInterval(() => ticker.emit('tick', ++client.data.tick), 50)
   })
 })()
