@@ -1,4 +1,4 @@
-/** @type {import("../types/events/Event").Event} */
+/** @type {import("../../types/events/Event").Event} */
 module.exports = {
   name: 'network_stack_latency',
   once: false,
