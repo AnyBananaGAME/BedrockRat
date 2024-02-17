@@ -1,6 +1,5 @@
 const { ClientAuthInput } = require('../network/packets/ClientAuthInput')
 const sleep = ms => new Promise((resolve) => setTimeout(resolve, ms))
-const util = require('util')
 
 /** @param {import("../../types/index").BedrockRat} client */
 module.exports = (client) => {
@@ -20,8 +19,6 @@ module.exports = (client) => {
       client.data.yaw = data.yaw
       client.data.pitch = data.pitch
 
-      console.log(data.pitch)
-
       const packet = new ClientAuthInput(client, actions1, position)
       client.queue('player_auth_input', packet.create())
 
@@ -36,12 +33,12 @@ module.exports = (client) => {
           const actions3 = [{ action: 'stop_break' }, { action: 'crack_break', position: { x, y, z }, face: 2 }]
 
           const packet3 = new ClientAuthInput(client, actions3, position, true)
-          client.queue("player_auth_input", packet3.create())
+          client.queue('player_auth_input', packet3.create())
           await sleep(50)
+          console.log('Finished queueing packets')
           resolve()
         }
       }, 50)
-      console.log('Finished queueing packets')
     })
   }
 }

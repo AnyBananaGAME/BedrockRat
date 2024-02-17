@@ -9,7 +9,8 @@ const client = createClient({
   port: config.port,
   offline: config.offline,
   username: config.username,
-  version: config.version
+  version: config.version,
+  skipPing: false
 })
 
 client.data = {
