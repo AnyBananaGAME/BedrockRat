@@ -15,6 +15,10 @@ module.exports = (client) => {
 
       const actions1 = [{ action: 'start_break', position: { x, y, z }, face: 3 }, { action: 'crack_break', position: { x, y, z }, face: 2 }]
 
+      if (position.x > client.data.position.x + 5 || position.z > client.data.position.z + 5) {
+        reject(new Error('The block is too far from the player.\nMax distance is 5 blocks.'))
+      }
+
       const data = calculatePitchAndYaw(client.data.position, position)
       client.data.yaw = data.yaw
       client.data.pitch = data.pitch
