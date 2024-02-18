@@ -30,7 +30,7 @@ const libs = fs.readdirSync('./src/libs').filter(file => file.endsWith('js'));
   }
 
   client.eventHandler()
-  
+
   client.once('spawn', () => {
     const pos = client.startGameData.player_position
     client.data.runtime_entity_id = client.startGameData.runtime_entity_id
@@ -38,6 +38,5 @@ const libs = fs.readdirSync('./src/libs').filter(file => file.endsWith('js'));
     console.log('Spawned in! at: ', pos)
     client.express()
     setInterval(() => ticker.emit('tick', ++client.data.tick), 50)
-    
   })
 })()
