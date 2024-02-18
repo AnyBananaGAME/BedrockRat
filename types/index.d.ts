@@ -1,4 +1,5 @@
 import { Client } from 'bedrock-protocol';
+import { Inventory } from '../src/player/Inventory/Inventory';
 
 
 /**
@@ -19,6 +20,7 @@ export interface BedrockRat extends Client {
         yaw: number;
         pitch: number;
     }
+    inventory: Inventory;
     mine(blockPosition: string): Promise<void>;
 }
 
