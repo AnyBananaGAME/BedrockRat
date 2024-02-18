@@ -39,7 +39,6 @@ module.exports = (client) => {
           const packet3 = new ClientAuthInput(client, actions3, position, true)
           client.queue('player_auth_input', packet3.create())
           await sleep(50)
-          console.log('Finished queueing packets')
           resolve()
         }
       }, 50)
