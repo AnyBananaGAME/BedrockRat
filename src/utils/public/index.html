@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Content</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>Inventory Content</h1>
+
+    <div class="input-container">
+        <div class="input-box">
+            <label for="slotInput">Slot:</label>
+            <input type="number" id="slotInput">
+        </div>
+
+        <div class="input-box">
+            <label for="countInput">Count:</label>
+            <input type="number" id="countInput">
+        </div>
+
+        <button class="fetch-button" onclick="fetchData()">Drop</button>
+    </div>
+
+    <div id="extraDataForm" class="extra-data-form">
+        <span class="close-button" onclick="closeForm()">×</span>
+        <form id="extraDataFormContent" class="extra-data-form-content">
+            <button type="button" class="submit-button" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+    
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Slot</th>
+                <th>Network ID</th>
+                <th>Count</th>
+                <th>Metadata</th>
+                <th>Has Stack ID</th>
+                <th>Stack ID</th>
+                <th>Block Runtime ID</th>
+                <th>Extra Data</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="index.js"></script>
+</body>
+</html>
