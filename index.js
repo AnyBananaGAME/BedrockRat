@@ -2,6 +2,7 @@ const { createClient } = require('bedrock-protocol')
 const { EventEmitter } = require('events')
 const fs = require('fs')
 const config = require('./config.json')
+const ticker = new EventEmitter()
 
 /** @type {import('./types/index').BedrockRat} */
 const client = createClient({
@@ -29,14 +30,14 @@ const libs = fs.readdirSync('./src/libs').filter(file => file.endsWith('js'));
   }
 
   client.eventHandler()
-
-  const ticker = new EventEmitter()
-
+  
   client.once('spawn', () => {
     const pos = client.startGameData.player_position
     client.data.runtime_entity_id = client.startGameData.runtime_entity_id
     client.data.position = pos
     console.log('Spawned in! at: ', pos)
+    client.express()
     setInterval(() => ticker.emit('tick', ++client.data.tick), 50)
+    
   })
 })()
