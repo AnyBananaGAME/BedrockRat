@@ -1,12 +1,8 @@
-class ClientAuthInput {
-  constructor (client, blockAction = undefined, blockPosition = undefined, final = false) {
+class PlayerAuthInput {
+  constructor (client, blockAction = undefined) {
     this.client = client
     this.block_action = blockAction
     this.face = 3
-
-    const x = blockPosition.x
-    const y = blockPosition.y
-    const z = blockPosition.z
 
     const pos = this.client.data.position
 
@@ -53,7 +49,7 @@ class ClientAuthInput {
         start_gliding: false,
         stop_gliding: false,
         item_interact: false,
-        block_action: true,
+        block_action: false,
         item_stack_request: false,
         handled_teleport: false,
         emoting: false,
@@ -77,27 +73,6 @@ class ClientAuthInput {
       block_action: this.block_action,
       analogue_move_vector: { x: 0, z: 0 }
     }
-
-    if (final) {
-      this.data.input_data.item_interact = true
-      this.data.transaction = {
-
-        legacy: {
-          legacy_request_id: 0
-        },
-        actions: [],
-        data: {
-          action_type: 'break_block',
-          block_position: { x, y, z },
-          face: this.face,
-          hotbar_slot: 0,
-          held_item: { network_id: 0 },
-          player_pos: pos,
-          click_pos: { x: 0, y: 0, z: 0 },
-          block_runtime_id: 0
-        }
-      }
-    }
   }
 
   create () {
@@ -105,4 +80,4 @@ class ClientAuthInput {
   }
 }
 
-module.exports = { ClientAuthInput }
+module.exports = { PlayerAuthInput }
