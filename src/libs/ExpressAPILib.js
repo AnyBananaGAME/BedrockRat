@@ -4,7 +4,7 @@ const path = require('path')
 module.exports = (client) => {
   client.express = () => {
     const app = express()
-    const port = 3000
+    const port = 30001
     app.use(express.json())
 
     app.get('/api/data', (req, res) => {
@@ -16,7 +16,7 @@ module.exports = (client) => {
     app.use(express.static(staticFilesDir))
 
     app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`)
+      console.log(`[http://localhost:${port}] ${new Date().toISOString()}`)
     })
   }
 }
