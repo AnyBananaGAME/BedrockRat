@@ -188,7 +188,6 @@ module.exports = (version) => {
             continue
           }
           mcData[fieldName] = sortArrayByKey(parsed, sortBy)
-          console.log(fieldName, 'sort')
         }
         break
       case 'overwrite':
