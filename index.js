@@ -1,8 +1,11 @@
+const version = '1.20.61'
 const { createClient } = require('bedrock-protocol')
 const { EventEmitter } = require('events')
 const fs = require('fs')
 const config = require('./config.json')
+const { Physics, PlayerState } = require('prismarine-physics')
 const ticker = new EventEmitter()
+const mcData = require('./src/mcData/mcData')(`bedrock_${version}`)
 
 /** @type {import('./types/index').BedrockRat} */
 const client = createClient({
@@ -11,8 +14,11 @@ const client = createClient({
   offline: config.offline,
   username: config.username,
   version: config.version,
-  skipPing: false
+  skipPing: true
 })
+
+client.registry = mcData
+client.version = `bedrock_${version}`
 
 client.data = {
   position: { x: 0, y: 0, z: 0 },
@@ -20,14 +26,31 @@ client.data = {
   tick: 0,
   yaw: 0,
   pitch: 0,
-  debug: true
+  debug: true,
+  world: {
+    columns: {}
+
+  }
 }
+
+ticker.on('tick', (tick) => {
+  if (!client.movement) return
+  client.movement.tick()
+
+  if (client.playerState.teleportTicks === 0) {
+    client.movement.send(client.controls)
+    client.physics.simulatePlayer(client.playerState, client.world).apply(client)
+  }
+})
+
 const libs = fs.readdirSync('./src/libs').filter(file => file.endsWith('js'));
 
 (async () => {
   for (const lib of libs) {
     require('./src/libs/' + lib)(client)
   }
+  const physics = Physics(mcData, client.world)
+  client.physics = physics
 
   client.eventHandler()
 
@@ -37,6 +60,16 @@ const libs = fs.readdirSync('./src/libs').filter(file => file.endsWith('js'));
     client.data.position = pos
     console.log('Spawned in! at: ', pos)
     client.express()
+
+    client.playerState = new PlayerState(client, client.controls)
+    client.playerState.teleportTicks = 5
+    const movement = require('./src/Player/Movement')(client, client.playerState)
+    client.movement = movement
+
+    client.clearControlStates = function () {
+      movement.send(client.controls)
+    }
+
     setInterval(() => ticker.emit('tick', ++client.data.tick), 50)
   })
 })()
