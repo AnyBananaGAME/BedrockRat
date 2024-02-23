@@ -19,6 +19,9 @@ export interface BedrockRat extends Client {
         runtime_entity_id: number;
         yaw: number;
         pitch: number;
+        world: {
+            columns: Array      
+        }
     }
     inventory: Inventory;
     mine(blockPosition: string): Promise<void>;
