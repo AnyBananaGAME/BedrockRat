@@ -11,7 +11,7 @@ module.exports = (client) => {
 
       const stop = tick + 5
 
-      const temp = calculatePitchAndYaw(client.playerState.position, position)
+      const temp = calculatePitchAndYaw(client.playerState.position ?? client.data.position, position)
       client.playerState.pitch = temp.pitch
       client.playerState.yaw = temp.yaw
 
@@ -77,15 +77,15 @@ module.exports = (client) => {
  */
 function calculatePitchAndYaw (playerPosition, blockPosition) {
   const deltaX = blockPosition.x - playerPosition.x
-  const deltaY = blockPosition.y - (playerPosition.y + 1.65)
+  const deltaY = blockPosition.y - (playerPosition.y + 1.62)
   const deltaZ = blockPosition.z - playerPosition.z
 
   const angle = Math.atan2(deltaZ, deltaX)
-  const degrees = angle * (180 / Math.PI)
+  const degrees = angle * (180 / Math.PI) // me brain dum
   const direction = Math.round(((degrees + 180) % 360) / 90) % 4
 
   let yaw
-  switch (direction) {
+  switch (direction) { // idk how to calcuate this
     case 0:
       yaw = 180 // South
       break

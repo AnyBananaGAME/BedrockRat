@@ -9,7 +9,7 @@ module.exports = {
     }
     const position = client.data.position
     position.x = Number(params.position.x)
-    position.y = Number(params.position.y- 1.621)
+    position.y = Number(params.position.y - 1.621)
     position.z = Number(params.position.z)
 
     client.playerState.teleportTicks = 5

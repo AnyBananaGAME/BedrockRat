@@ -196,17 +196,16 @@ module.exports = (version) => {
     }
   }
 
-
   mcData.blocksByStateId = {}
   Object.values(mcData.blocks).forEach(async block => {
-    let difference = block.maxStateId - block.minStateId;
-    if(difference <= 0){
+    const difference = block.maxStateId - block.minStateId
+    if (difference <= 0) {
       mcData.blocksByStateId[block.minStateId] = block
-      return;
+      return
     }
-    for(let i = 0; i <= difference; i++){
-      if(block.id == 4) console.log(block.minStateId + i);
-      mcData.blocksByStateId[block.minStateId+i] = block
+    for (let i = 0; i <= difference; i++) {
+      if (block.id === 4) console.log(block.minStateId + i)
+      mcData.blocksByStateId[block.minStateId + i] = block
     }
   })
   return mcData
