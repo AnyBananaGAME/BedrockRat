@@ -9,8 +9,7 @@
   "standard": {
     "ignore": [
       "*/utils/public/",
-      "*/player/Movement.js" 
-
+      "*/player/Movement.js"
     ]
   },
   "keywords": [],
