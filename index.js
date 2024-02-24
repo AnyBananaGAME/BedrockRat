@@ -57,8 +57,8 @@ const libs = fs.readdirSync('./src/libs').filter(file => file.endsWith('js'));
   client.once('spawn', () => {
     const pos = client.startGameData.player_position
     client.data.runtime_entity_id = client.startGameData.runtime_entity_id
-    client.data.position = pos
-    console.log('Spawned in! at: ', pos)
+    client.data.position = {x: pos.x, y: pos.y - 1.621, z: pos.z}
+    console.log('Spawned in! at: ', client.data.position)
     client.express()
 
     client.playerState = new PlayerState(client, client.controls)
