@@ -196,9 +196,18 @@ module.exports = (version) => {
     }
   }
 
+
   mcData.blocksByStateId = {}
-  Object.values(mcData.blocks).forEach(block => {
-    mcData.blocksByStateId[block.defaultState] = block
+  Object.values(mcData.blocks).forEach(async block => {
+    let difference = block.maxStateId - block.minStateId;
+    if(difference <= 0){
+      mcData.blocksByStateId[block.minStateId] = block
+      return;
+    }
+    for(let i = 0; i <= difference; i++){
+      if(block.id == 4) console.log(block.minStateId + i);
+      mcData.blocksByStateId[block.minStateId+i] = block
+    }
   })
   return mcData
 }
