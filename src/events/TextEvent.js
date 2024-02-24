@@ -1,16 +1,21 @@
+const mcdata = require("minecraft-data")('bedrock_1.20.61');
 /** @type {import("../../types/events/Event").Event} */
 module.exports = {
   name: 'text',
   once: false,
   execute: async (params, client) => {
-    // This is for testing the mining
-    if (params.message.includes('.')) {
-      const position = client.data.position
-      for (let x = 0; x < 5; x++) {
-        for (let i = 1; i < 5; i++) {
-          await client.mine({ x: position.x + x, y: position.y - 2, z: position.z - i })
-        }
+    let code = params.message.replace(/§[0-9a-fk-or]/gi, '').replace(/%/g, ''); 
+    if (mcdata.language[code]) {
+      let translatedMessage = mcdata.language[code];
+    
+      for (let i = 0; i < params.parameters.length; i++) {
+        let placeholder = `%s`;
+        translatedMessage = translatedMessage.replace(placeholder, params.parameters[i]);
       }
+      
+      console.log(translatedMessage);
+    } else {
+      console.log("No translation found for code:", code);
     }
   }
 }
