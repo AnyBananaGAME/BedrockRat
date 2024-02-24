@@ -42,7 +42,7 @@
     "name": "dirt",
     "hardness": 0.5,
     "resistance": 0.5,
-    "minStateId": 9550,
+    "minStateId": 9568,
     "maxStateId": 9568,
     "drops": [15],
     "diggable": true,
@@ -78,8 +78,8 @@
     "name": "flowing_water",
     "hardness": 100,
     "resistance": 100,
-    "minStateId": 9568,
-    "maxStateId": 9568,
+    "minStateId": 8099,
+    "maxStateId": 8105,
     "drops": [],
     "diggable": false,
     "transparent": true,
@@ -88,7 +88,7 @@
     "boundingBox": "empty",
     "stackSize": 64,
     "material": "default",
-    "defaultState": 9568
+    "defaultState": 8099
   },
   {
     "id": 5,
@@ -270,6 +270,24 @@
     "stackSize": 64,
     "material": "vine_or_glow_lichen;plant;mineable/axe",
     "defaultState": 2338
+  },
+  {
+    "id": 15,
+    "displayName": "Blue Ice",
+    "name": "blue_ice",
+    "hardness": 0.5,
+    "resistance": 0.5,
+    "minStateId": 12248,
+    "maxStateId": 12248,
+    "drops": [441],
+    "diggable": true,
+    "transparent": false,
+    "filterLight": 15,
+    "emitLight": 0,
+    "boundingBox": "block",
+    "stackSize": 64,
+    "material": "mineable/pickaxe",
+    "defaultState": 12248
   }
 
 ]
