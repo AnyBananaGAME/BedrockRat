@@ -14,7 +14,7 @@ module.exports = (client) => {
       res.json(inventory)
     })
     
-    const staticFilesDir = path.join(__dirname, '../utils/public')
+    const staticFilesDir = path.join(__dirname, '../../../utils/public')
     app.use(express.static(staticFilesDir))
 
     app.listen(port, () => {

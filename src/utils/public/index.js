@@ -1,7 +1,7 @@
 async function fetchData () {
   const slotInput = document.getElementById('slotInput').value
   const countInput = document.getElementById('countInput').value
-  const apiUrl = 'http://localhost:3000/api/drop'
+  const apiUrl = 'http://localhost:30001/api/drop'
   const jsonData = { slot: slotInput, count: countInput }
 
   const dropButton = document.querySelector('.fetch-button')
@@ -27,7 +27,7 @@ async function fetchData () {
 
 async function fetchAndUpdateData () {
   try {
-    const response = await fetch('http://localhost:3000/api/data')
+    const response = await fetch('http://localhost:30001/api/data')
     if (!response.ok) throw new Error('Network response was not ok')
     const data = await response.json()
     updateTable(data)

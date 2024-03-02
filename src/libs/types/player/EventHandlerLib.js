@@ -18,5 +18,5 @@ module.exports = (client) => {
       }
     }
   }
-  client.once("spawn", () => {client.eventHandler()})
+  client.eventHandler();
 }
