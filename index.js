@@ -29,14 +29,14 @@ client.data = {
   debug: true,
   world: {
     columns: {}
-
+  
   }
 }
 
 ticker.on('tick', (tick) => {
   if (!client.movement) return
   client.movement.tick()
-
+  
   if (client.playerState.teleportTicks === 0) {
     client.movement.send(client.controls)
     client.physics.simulatePlayer(client.playerState, client.world).apply(client)

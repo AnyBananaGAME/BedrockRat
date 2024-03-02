@@ -1,5 +1,7 @@
 import { Client } from 'bedrock-protocol';
 import { Inventory } from '../src/player/Inventory/Inventory';
+import { World } from './more/World';
+import { BedrockChunk, CommonChunk } from 'prismarine-chunk';
 
 
 /**
@@ -20,9 +22,11 @@ export interface BedrockRat extends Client {
         yaw: number;
         pitch: number;
         world: {
-            columns: Array      
+            columns: Array<CommonChunk>      
         }
     }
+    world: World
+
     inventory: Inventory;
     mine(blockPosition: string): Promise<void>;
 }

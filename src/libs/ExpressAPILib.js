@@ -5,13 +5,15 @@ module.exports = (client) => {
   client.express = () => {
     const app = express()
     const port = 30001
-    app.use(express.json())
+    client.app = app;
 
+    app.use(express.json())
+    
     app.get('/api/data', (req, res) => {
       const inventory = client.inventory.slots
       res.json(inventory)
     })
-
+    
     const staticFilesDir = path.join(__dirname, '../utils/public')
     app.use(express.static(staticFilesDir))
 
