@@ -1,6 +1,6 @@
 const express = require('express')
 const path = require('path')
-/** @param {import("../../types/index").BedrockRat} client */
+/** @param {import("../../../../types/index").BedrockRat} client */
 module.exports = (client) => {
   client.express = () => {
     const app = express()
@@ -21,4 +21,5 @@ module.exports = (client) => {
       console.log(`[http://localhost:${port}] ${new Date().toISOString()}`)
     })
   }
+  client.once("spawn", () => {client.express()})
 }

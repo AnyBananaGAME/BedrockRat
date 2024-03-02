@@ -1,5 +1,5 @@
 const sleep = ms => new Promise((resolve) => setTimeout(resolve, ms))
-/** @param {import("../../types/index").BedrockRat} client */
+/** @param {import("../../../../types/index").BedrockRat} client */
 module.exports = (client) => {
   client.mine = async (position) => {
     return new Promise((resolve, reject) => {

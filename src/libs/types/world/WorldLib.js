@@ -1,11 +1,10 @@
 const { Vec3 } = require('vec3')
-const { RaycastIterator } = require('../utils/Iterations')
 
 module.exports = (client) => {
   const Block = require('prismarine-block')(client.registry)
   
 
-  /** @param {import("../../types/index").BedrockRat} client */
+  /** @param {import("../../../../types/index").BedrockRat} client */
   client.world = {
     getData: () => {
       return client.data;
@@ -42,26 +41,5 @@ module.exports = (client) => {
       return column;
     },
     
-    raycast: async (from, direction, range, matcher = null) => {
-      const iter = new RaycastIterator(from, direction, range);
-      let pos = iter.next();
-      
-      while (pos) {
-        const position = new Vec3(pos.x, pos.y, pos.z);
-        const block = await client.world.getBlock(position);
-        
-        if (block && (!matcher || matcher(block))) {
-          const intersect = iter.intersect(block.shapes, position);
-          
-          if (intersect) {
-            block.face = intersect.face;
-            block.intersect = intersect.pos;
-            return block;
-          }
-        }
-        pos = iter.next();
-      }
-      return null;
-    }
   }
 }
