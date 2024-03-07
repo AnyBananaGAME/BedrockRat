@@ -11,7 +11,18 @@ module.exports = {
         client.inventory.setItem(item, i)
         i++
       })
+    } else {
+      if (client.data.container?.window_id) {
+        const container = client.data.container
+
+        const inventoryItems = params.input.filter(item => item)
+
+        let i = 0
+        inventoryItems.forEach(item => {
+          container.setItem(item, i)
+          i++
+        })
+      }
     }
-    params = undefined
   }
 }
