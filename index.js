@@ -1,10 +1,12 @@
 const version = '1.20.61'
 const { createClient } = require('bedrock-protocol')
 const { EventEmitter } = require('events')
-const fs = require('fs')
 const config = require('./config.json')
-const { Physics, PlayerState } = require('prismarine-physics')
+const { Physics } = require('prismarine-physics')
 const { LibHandler } = require('./src/libs/LibHandler')
+const { InventoryTransaction, ACTION_TYPE, TRANSACTION_TYPE } = require('./src/network/packets/InventoryTransaction')
+const { Vec3 } = require('vec3')
+const { Container } = require('./src/network/types/Container')
 const ticker = new EventEmitter()
 const mcData = require('./src/mcData/mcData')(`bedrock_${version}`)
 
@@ -30,14 +32,17 @@ client.data = {
   debug: true,
   world: {
     columns: {}
-  
-  }
+
+  },
+  container: undefined,
+  hotbar_slot: 0
 }
+client.inventory = new Container(2, 'inventory', new Vec3(0, 0, 0), client.data.runtime_entity_id)
 
 ticker.on('tick', (tick) => {
   if (!client.movement) return
   client.movement.tick()
-  
+
   if (client.playerState.teleportTicks === 0) {
     client.movement.send(client.controls)
     client.physics.simulatePlayer(client.playerState, client.world).apply(client)
@@ -45,15 +50,21 @@ ticker.on('tick', (tick) => {
 });
 
 (async () => {
-  new LibHandler(client).handle();
+  new LibHandler(client).handle()
 
   const physics = Physics(mcData, client.world)
   client.physics = physics
 
-
   client.once('spawn', () => {
-    console.log("Player has spawned in! At: " + client.entity.position)
+    console.log('Player has spawned in! At: ' + client.entity.position)
+    setInterval(() => ticker.emit('tick', ++client.data.tick), 50)
 
-    setInterval(() => ticker.emit('tick', ++client.data.tick), 50);
+    if (client.data.debug) {
+      const transaction = new InventoryTransaction(client, TRANSACTION_TYPE.ITEM_USE, [], ACTION_TYPE.CLICK_BLOCK, { block_position: new Vec3(462, 64, 194), hotbar_slot: 0 })
+      const packet = transaction.create()
+      console.log(packet)
+      client.pp = packet
+      client.queue(transaction.name, packet)
+    }
   })
 })()
