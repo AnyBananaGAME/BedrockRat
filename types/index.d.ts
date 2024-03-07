@@ -2,8 +2,7 @@ import { Client } from 'bedrock-protocol';
 import { Inventory } from '../src/player/Inventory/Inventory';
 import { World } from './more/World';
 import { BedrockChunk, CommonChunk } from 'prismarine-chunk';
-
-
+import { Container } from '../src/network/types/Container'
 /**
  * Returns the Position of something.
  */
@@ -23,11 +22,12 @@ export interface BedrockRat extends Client {
         pitch: number;
         world: {
             columns: Array<CommonChunk>      
-        }
+        },
+        container: Container
     }
     world: World
 
-    inventory: Inventory;
+    inventory: Container,
     mine(blockPosition: string): Promise<void>;
 }
 
