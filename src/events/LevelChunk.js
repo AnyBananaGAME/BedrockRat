@@ -8,6 +8,6 @@ module.exports = {
     const payload = Buffer.from(params.payload)
 
     await column.networkDecodeNoCache(payload, params.sub_chunk_count)
-    client.data.world.columns[`${params.x}:${params.z}`] = column; 
+    client.data.world.columns[`${params.x}:${params.z}`] = column
   }
 }

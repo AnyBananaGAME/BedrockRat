@@ -7,7 +7,7 @@ module.exports = (client) => {
 
     for (const file of eventFiles) {
       /** @type {import("../../../../types/events/Event").Event} */
-      const event = require("../../../events/" + file)
+      const event = require('../../../events/' + file)
       if (client.data.debug) {
         console.log('[debug] New Event added: ', event.name)
       }
@@ -18,5 +18,5 @@ module.exports = (client) => {
       }
     }
   }
-  client.eventHandler();
+  client.eventHandler()
 }
