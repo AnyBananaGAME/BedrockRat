@@ -11,6 +11,7 @@ module.exports = {
         client.inventory.setItem(item, i)
         i++
       })
+      client.inventory.onOpen();
     } else {
       if (client.data.container?.window_id) {
         const container = client.data.container
@@ -22,6 +23,7 @@ module.exports = {
           container.setItem(item, i)
           i++
         })
+        client.data.container.onOpen();
       }
     }
   }

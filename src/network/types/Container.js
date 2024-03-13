@@ -55,6 +55,13 @@ class Container {
     }
     return null
   }
+
+  onOpen(){
+    console.log("Container with the type of "+ this.window_type+' has been opened!');
+  }
+  onClose(){
+    console.log("Container with the type of "+ this.window_id+' has been closed!');
+  }
 }
 
 module.exports = { Container }
