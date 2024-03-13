@@ -3,6 +3,7 @@ import { Inventory } from '../src/player/Inventory/Inventory';
 import { World } from './more/World';
 import { BedrockChunk, CommonChunk } from 'prismarine-chunk';
 import { Container } from '../src/network/types/Container'
+import { Entity } from '../src/network/types/Entity';
 /**
  * Returns the Position of something.
  */
@@ -29,6 +30,9 @@ export interface BedrockRat extends Client {
 
     inventory: Container,
     mine(blockPosition: string): Promise<void>;
+    addEntity(entity: Entity);
+    removeEntity(runtimeId: string);
+    findEntities(radius: Number): Entity[]
 }
 
 export default BedrockRat;

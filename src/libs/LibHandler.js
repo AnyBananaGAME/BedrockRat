@@ -4,6 +4,7 @@ const EventHandlerLib = require('./types/player/EventHandlerLib')
 const InventoryLib = require('./types/player/InventoryLib')
 const MiningLib = require('./types/player/MiningLib')
 const MovementLib = require('./types/player/MovementLib')
+const EntityHandler = require('./types/world/EntityHandler')
 const WorldLib = require('./types/world/WorldLib')
 
 class LibHandler {
@@ -15,7 +16,8 @@ class LibHandler {
      * Gonna handle libs like that. So they can be done in multiple ways.
      */
   async handle () {
-    EntityLib(this.client)
+    new EntityLib(this.client)
+    EntityHandler(this.client)
     EventHandlerLib(this.client)
     WorldLib(this.client)
     ExpressAPILib(this.client)

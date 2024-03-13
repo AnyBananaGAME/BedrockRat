@@ -14,6 +14,7 @@ module.exports = {
     },
     params.block_runtime_id
     )
+
     if (client.data.debug) console.log('[debug] UpdateBlockEvent => ' + params.block_runtime_id)
   }
 }

@@ -12,8 +12,9 @@ module.exports = (client) => {
       const stop = tick + 5
 
       const temp = calculatePitchAndYaw(client.playerState.position ?? client.data.position, position)
-      client.playerState.pitch = temp.pitch
-      client.playerState.yaw = temp.yaw
+      // client.playerState.pitch = temp.pitch
+      // client.playerState.yaw = temp.yaw
+      console.log(temp)
 
       if (position.x > client.data.position.x + 5 || position.z > client.data.position.z + 5) {
         reject(new Error('The block is too far from the player.\nMax distance is 5 blocks.'))
@@ -75,32 +76,15 @@ module.exports = (client) => {
  * @param {Object} blockPosition - The block's position {x, y, z}.
  * @returns {Object}
  */
-function calculatePitchAndYaw (playerPosition, blockPosition) {
-  const deltaX = blockPosition.x - playerPosition.x
-  const deltaY = blockPosition.y - (playerPosition.y + 1.62)
-  const deltaZ = blockPosition.z - playerPosition.z
+function calculatePitchAndYaw(playerPosition, blockPosition) {
+  const deltaX = blockPosition.x - playerPosition.x;
+  const deltaY = blockPosition.y - (playerPosition.y + 1.62); 
+  const deltaZ = blockPosition.z - playerPosition.z;
+  const yaw = Math.atan2(-deltaZ, deltaX) * 180 / Math.PI;
+  const correctedYaw = (yaw >= 0 ? yaw : 360 + yaw) - 90;
+  const horizontalDistance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
+  const pitch = Math.atan2(deltaY, horizontalDistance) * 180 / Math.PI;
 
-  const angle = Math.atan2(deltaZ, deltaX)
-  const degrees = angle * (180 / Math.PI) // me brain dum
-  const direction = Math.round(((degrees + 180) % 360) / 90) % 4
-
-  let yaw
-  switch (direction) { // idk how to calcuate this
-    case 0:
-      yaw = 180 // South
-      break
-    case 1:
-      yaw = 270 // West
-      break
-    case 2:
-      yaw = 0 // North
-      break
-    case 3:
-      yaw = 90 // East
-      break
-  }
-
-  const horizontalDistance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ)
-  const pitch = Math.atan2(deltaY, horizontalDistance) * (180 / Math.PI)
-  return { pitch, yaw }
+  return { yaw: correctedYaw, pitch };
 }
+
