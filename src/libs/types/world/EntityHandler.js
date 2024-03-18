@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { Entity } = require('../../../network/types/Entity');
 
 /** @param {import("../../../../types/index").BedrockRat} client */
 module.exports = (client) => {
