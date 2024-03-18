@@ -24,7 +24,7 @@
     "mineflayer": "^4.20.0",
     "prismarine-block": "^1.17.0",
     "prismarine-chunk": "github:Flonja/prismarine-chunk#fix/network-decode",
-    "prismarine-physics": "github:The-HolyLand/prismarine-physics",
+    "prismarine-physics": "github:Flonja/prismarine-physics#fix/bedrock-liquids",
     "prismarine-viewer": "^1.28.0",
     "vec3": "^0.1.10"
   }
