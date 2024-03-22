@@ -76,15 +76,14 @@ module.exports = (client) => {
  * @param {Object} blockPosition - The block's position {x, y, z}.
  * @returns {Object}
  */
-function calculatePitchAndYaw(playerPosition, blockPosition) {
-  const deltaX = blockPosition.x - playerPosition.x;
-  const deltaY = blockPosition.y - (playerPosition.y + 1.62); 
-  const deltaZ = blockPosition.z - playerPosition.z;
-  const yaw = Math.atan2(-deltaZ, deltaX) * 180 / Math.PI;
-  const correctedYaw = (yaw >= 0 ? yaw : 360 + yaw) - 90;
-  const horizontalDistance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
-  const pitch = Math.atan2(deltaY, horizontalDistance) * 180 / Math.PI;
+function calculatePitchAndYaw (playerPosition, blockPosition) {
+  const deltaX = blockPosition.x - playerPosition.x
+  const deltaY = blockPosition.y - (playerPosition.y + 1.62)
+  const deltaZ = blockPosition.z - playerPosition.z
+  const yaw = Math.atan2(-deltaZ, deltaX) * 180 / Math.PI
+  const correctedYaw = (yaw >= 0 ? yaw : 360 + yaw) - 90
+  const horizontalDistance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ)
+  const pitch = Math.atan2(deltaY, horizontalDistance) * 180 / Math.PI
 
-  return { yaw: correctedYaw, pitch };
+  return { yaw: correctedYaw, pitch }
 }
-

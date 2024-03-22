@@ -30,6 +30,9 @@ class EntityLib {
       sprint: false,
       sneak: false
     }
+  }
+
+  set () {
     this.client.entity = this
   }
 }

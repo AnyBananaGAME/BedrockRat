@@ -1,5 +1,3 @@
-const { parseArgs } = require("util")
-
 /** @type {import("../../types/events/Event").Event} */
 module.exports = {
   name: 'level_chunk',
@@ -10,7 +8,7 @@ module.exports = {
     const payload = Buffer.from(params.payload)
 
     await column.networkDecodeNoCache(payload, params.sub_chunk_count)
-    client.data.world.columns[`${params.x}:${params.z}`] = column;
-    client.emit("chunkColumnLoad", {position: {x: params.x, y: params.y, z: params.z }})
-     }
+    client.data.world.columns[`${params.x}:${params.z}`] = column
+    client.emit('chunkColumnLoad', { position: { x: params.x, y: params.y, z: params.z } })
+  }
 }

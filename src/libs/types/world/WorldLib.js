@@ -1,5 +1,5 @@
 const { Vec3 } = require('vec3')
-const { RaycastIterator } = require("../../../utils/iterators")
+const { RaycastIterator } = require('../../../utils/iterators')
 
 module.exports = (client) => {
   const Block = require('prismarine-block')(client.registry)
@@ -30,39 +30,39 @@ module.exports = (client) => {
       return true
     },
 
-    addColumn: (x,z, collumn) => {
+    addColumn: (x, z, collumn) => {
       client.data.world.columns[`${x >> 4}:${z >> 4}`] = collumn
     },
 
-    getColumn: (x,z) => {
+    getColumn: (x, z) => {
       const column = client.data.world.columns[`${x >> 4}:${z >> 4}`]
       return column
     },
     getColumnAt: (pos) => {
-      pos = Object.assign({}, pos);
+      pos = Object.assign({}, pos)
       const column = client.data.world.columns[`${pos.x >> 4}:${pos.z >> 4}`]
       return column
     },
     raycast: async (from, direction, range, matcher = null) => {
-      const iter = new RaycastIterator(from, direction, range);
-      let pos = iter.next();
+      const iter = new RaycastIterator(from, direction, range)
+      let pos = iter.next()
 
       while (pos) {
-        const position = new Vec3(pos.x, pos.y, pos.z);
-        const block = await client.world.getBlock(position);
+        const position = new Vec3(pos.x, pos.y, pos.z)
+        const block = await client.world.getBlock(position)
 
         if (block && (!matcher || matcher(block))) {
-          const intersect = iter.intersect(block.shapes, position);
+          const intersect = iter.intersect(block.shapes, position)
 
           if (intersect) {
-            block.face = intersect.face;
-            block.intersect = intersect.pos;
-            return block;
+            block.face = intersect.face
+            block.intersect = intersect.pos
+            return block
           }
         }
-        pos = iter.next();
+        pos = iter.next()
       }
-      return null;
+      return null
     }
   }
   client.world.columns = client.data.world.columns

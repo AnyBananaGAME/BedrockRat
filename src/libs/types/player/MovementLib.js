@@ -13,7 +13,7 @@ module.exports = (client) => {
 
     client.playerState = new PlayerState(client, client.controls)
     client.playerState.teleportTicks = 5
-    const movement =  new Movement(client, client.playerState)
+    const movement = new Movement(client, client.playerState)
     client.movement = movement
 
     client.clearControlStates = function () {
@@ -22,14 +22,14 @@ module.exports = (client) => {
   })
 
   class Movement {
-    pPos;
-    client;
-    playerState;
+    pPos
+    client
+    playerState
 
-    constructor(client, playerState){
+    constructor (client, playerState) {
       this.pPos = new Vec3(client.data.position.x, client.data.position.y, client.data.position.z)
-      this.client = client;
-      this.playerState = playerState;
+      this.client = client
+      this.playerState = playerState
 
       client.pMovements = {
         forward: false,
@@ -40,14 +40,12 @@ module.exports = (client) => {
         sprint: false,
         sneak: false
       }
-
-    
     }
 
     async send (intendedMovement) {
       const position = this.client.playerState.pos.clone().offset(0, 1.621, 0)
       const yaw = toNotchianYaw(this.client.playerState.yaw)
-      const pitch = toNotchianPitch(this.client.playerState.pitch) 
+      const pitch = toNotchianPitch(this.client.playerState.pitch)
 
       switch (this.client.startGameData.movement_authority) {
         case 'client':
@@ -62,13 +60,13 @@ module.exports = (client) => {
             tick: this.client.data.tick
           })
           break
-        case 'server':
+        case 'server': {
           const moveVec = { x: 0, z: 0 }
           moveVec.x += intendedMovement.left ? 1 : 0
           moveVec.x -= intendedMovement.right ? 1 : 0
           moveVec.z += intendedMovement.forward ? 1 : 0
           moveVec.z -= intendedMovement.back ? 1 : 0
-  
+
           const flags = {}
           if (intendedMovement.forward) flags.up = true
           if (intendedMovement.back) flags.down = true
@@ -95,7 +93,7 @@ module.exports = (client) => {
             flags.jumping = true
             flags.jump_down = true
           }
-  
+
           const packet = new PlayerAuthInput(this.client, undefined)
           packet.data.position = position
           packet.data.move_vector = moveVec
@@ -110,12 +108,14 @@ module.exports = (client) => {
           const Event = new Cancelable(data)
           await this.client.emit('pre_player_auth_input', Event)
           this.client.queue('player_auth_input', Event.data)
-          this.client.emit("move", {position: position});
+          this.client.emit('move', { position })
           break
         }
+      }
       this.client.pMovements = intendedMovement
       this.pPos = position
     }
+
     tick () {
       if (this.client.playerState.teleportTicks !== 0) {
         this.client.playerState.teleportTicks--
@@ -124,6 +124,4 @@ module.exports = (client) => {
       return this.client.data.tick
     }
   }
-
-
 }

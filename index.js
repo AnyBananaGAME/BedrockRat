@@ -10,7 +10,6 @@ const { Container } = require('./src/network/types/Container')
 const ticker = new EventEmitter()
 const mcData = require('./src/mcData/mcData')(`bedrock_${version}`)
 
-
 /** @type {import('./types/index').BedrockRat} */
 const client = createClient({
   host: config.host,
@@ -43,7 +42,7 @@ client.data = {
 client.inventory = new Container(2, 'inventory', new Vec3(0, 0, 0), client.data.runtime_entity_id)
 
 ticker.on('tick', (tick) => {
-  if (!client.movement) return;
+  if (!client.movement) return
   client.movement.tick()
 
   if (client.playerState.teleportTicks === 0) {
@@ -52,7 +51,7 @@ ticker.on('tick', (tick) => {
   }
 });
 
-(async () => { 
+(async () => {
   await new LibHandler(client).handle()
 
   const physics = Physics(mcData, client.world)

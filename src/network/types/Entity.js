@@ -1,8 +1,12 @@
-const Vec3 = require("vec3");
+/**
+ * Represents a vector in 3D space.
+ * @typedef {Object} Vec3
+ * @property {number} x - The x-coordinate of the vector.
+ * @property {number} y - The y-coordinate of the vector.
+ * @property {number} z - The z-coordinate of the vector.
+ */
 
 class Entity {
-
-
   /**
    *
    * @param {BigInt} unique_id
@@ -19,147 +23,162 @@ class Entity {
    * @param {Object} properties
    * @param {Array} link
    */
-  constructor(
-    unique_id, runtime_id, entity_type,
+  constructor (
+    uniqueId, runtimeId, entityType,
     position, velocity, pitch,
-    yaw, head_yaw, body_yaw,
+    yaw, headYaw, bodyYaw,
     attributes, metadata, properties,
     links
   ) {
+    this.unique_id = uniqueId
+    this.runtime_id = runtimeId
+    this.entity_type = entityType
+    this.position = position
+    this.velocity = velocity
+    this.pitch = pitch
+    this.yaw = yaw
+    this.head_yaw = headYaw
+    this.body_yaw = bodyYaw
+    this.attributes = attributes
+    this.metadata = metadata
+    this.properties = properties
+    this.links = links
+  }
 
-    this.unique_id = unique_id;
-    this.runtime_id = runtime_id;
-    this.entity_type = entity_type;
-    this.position = position;
-    this.velocity = velocity;
-    this.pitch = pitch;
-    this.yaw = yaw;
-    this.head_yaw = head_yaw;
-    this.body_yaw = body_yaw;
-    this.attributes = attributes;
-    this.metadata = metadata;
-    this.properties = properties;
-    this.links = links;
-  }
   /**
    *
    * @returns {Number}
    */
-  getUniqueId() {
-    return this.unique_id;
+  getUniqueId () {
+    return this.unique_id
   }
+
   /**
    *
    * @returns {Number}
    */
-  getRuntimeId() {
-    return this.runtime_id;
+  getRuntimeId () {
+    return this.runtime_id
   }
+
   /**
    *
    * @returns {String}
    */
-  getType() {
-    return this.entity_type;
+  getType () {
+    return this.entity_type
   }
+
   /**
    *
    * @returns {Vec3}
    */
-  getPosition() {
-    return this.position;
+  getPosition () {
+    return this.position
   }
+
   /**
    *
    * @returns {Vec3}
    */
-  getVelocity() {
-    return this.velocity;
+  getVelocity () {
+    return this.velocity
   }
+
   /**
    *
    * @returns {Number}
    */
-  getPitch() {
-    return this.pitch;
+  getPitch () {
+    return this.pitch
   }
+
   /**
    *
    * @returns {Number}
    */
-  getYaw() {
-    return this.yaw;
+  getYaw () {
+    return this.yaw
   }
+
   /**
    *
    * @returns {Number}
    */
-  getHeadYaw() {
-    return this.head_yaw;
+  getHeadYaw () {
+    return this.head_yaw
   }
+
   /**
    *
    * @returns {Number}
    */
-  getBodyYaw() {
-    return this.body_yaw;
+  getBodyYaw () {
+    return this.body_yaw
   }
+
   /**
    *
    * @returns {Array}
    */
-  getAttributes() {
-    return this.attributes;
+  getAttributes () {
+    return this.attributes
   }
+
   /**
    *
    * @returns {Array}
    */
-  getMetaData() {
-    return this.metadata;
+  getMetaData () {
+    return this.metadata
   }
+
   /**
    *
    * @returns {Array}
    */
-  getProperties() {
-    return this.properties;
+  getProperties () {
+    return this.properties
   }
+
   /**
    *
    * @returns {Array}
    */
-  getLinks() {
-    return this.links;
+  getLinks () {
+    return this.links
   }
+
   /**
    *
    * @returns {String}
    */
-  getNameTag() {
-    return this.metadata?.find(item => item.key === 'nametag')?.value ?? 'Not found';
+  getNameTag () {
+    return this.metadata?.find(item => item.key === 'nametag')?.value ?? 'Not found'
   }
+
   /**
    *
    * @returns {Number}
    */
-  getHealth() {
-    return this.attributes.find(attr => attr.name === 'minecraft:health')?.value ?? null;
+  getHealth () {
+    return this.attributes.find(attr => attr.name === 'minecraft:health')?.value ?? null
   }
 
   /**
-   * 
-   * @param {Any} value 
-   */ 
-  getMetaDataValue(value){
-    return this.metadata?.find(item => item.name === value)?.value ?? null;
+   *
+   * @param {Any} value
+   */
+  getMetaDataValue (value) {
+    return this.metadata?.find(item => item.name === value)?.value ?? null
   }
+
   /**
    *
    * @returns {Object}
    */
-  getFlags() {
-    return this.attributes?.find(item => item.key === "flags")?.value
+  getFlags () {
+    return this.attributes?.find(item => item.key === 'flags')?.value
   }
 }
 

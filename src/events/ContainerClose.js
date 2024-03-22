@@ -4,10 +4,10 @@ module.exports = {
   once: false,
   execute: async (params, client) => {
     if (params.window_type === 'inventory') {
-      client.inventory.onClose();
+      client.inventory.onClose()
       return
     }
-    client.data.container.onClose();
+    client.data.container.onClose()
     client.data.container = undefined
   }
 }

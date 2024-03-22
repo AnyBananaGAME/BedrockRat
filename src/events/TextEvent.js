@@ -5,11 +5,11 @@ module.exports = {
   once: false,
   execute: async (params, client) => {
     const code = params.message.replace(/§[0-9a-fk-or]/gi, '').replace(/%/g, '')
-    if(params.message.includes("mine")){
-      const v = client.entity.position; 
-      const x = v.x;
-      for(let i = 0; i < 5; i++){
-        await client.mine({x:x+i , y: v.y-1, z: v.z})
+    if (params.message.includes('mine')) {
+      const v = client.entity.position
+      const x = v.x
+      for (let i = 0; i < 5; i++) {
+        await client.mine({ x: x + i, y: v.y - 1, z: v.z })
       }
     }
 

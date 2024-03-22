@@ -16,7 +16,7 @@ class LibHandler {
      * Gonna handle libs like that. So they can be done in multiple ways.
      */
   async handle () {
-    new EntityLib(this.client)
+    new EntityLib(this.client).set()
     EntityHandler(this.client)
     EventHandlerLib(this.client)
     WorldLib(this.client)
