@@ -69,7 +69,8 @@ ticker.on('tick', (tick) => {
       client.queue(transaction.name, packet)
 
       
-      const viewer = new bedrockViewer.bedrock()
+      // const viewer = bedrockViewer.bedrock(client, {port: 2223})
+      
     }
   })
 })()
