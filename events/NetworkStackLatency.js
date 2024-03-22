@@ -6,7 +6,7 @@ module.exports = {
     const TimeStamp = BigInt(params.timestamp.toString() + '000000')
 
     client.queue('network_stack_latency', {
-      timestamp: TimeStamp,
+      timestamp: BigInt(TimeStamp),
       needs_response: params.needs_response
     })
   }
