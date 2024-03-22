@@ -13,6 +13,7 @@
     ]
   },
   "keywords": [],
+  "repository": {"type": "https://github.com/AnyBananaGAME/bedrockRat"},
   "author": "https://github.com/AnyBananaGAME",
   "license": "ISC",
   "dependencies": {
