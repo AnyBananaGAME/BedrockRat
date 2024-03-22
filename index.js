@@ -30,6 +30,7 @@ client.data = {
   tick: 0,
   yaw: 0,
   pitch: 0,
+  request_id: -2,
   debug: true,
   world: {
     columns: {}
