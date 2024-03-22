@@ -7,7 +7,6 @@ const { LibHandler } = require('./src/libs/LibHandler')
 const { InventoryTransaction, ACTION_TYPE, TRANSACTION_TYPE } = require('./src/network/packets/InventoryTransaction')
 const { Vec3 } = require('vec3')
 const { Container } = require('./src/network/types/Container')
-const bedrockViewer = require('bedrock-viewer')
 const ticker = new EventEmitter()
 const mcData = require('./src/mcData/mcData')(`bedrock_${version}`)
 
@@ -68,9 +67,8 @@ ticker.on('tick', (tick) => {
       client.pp = packet
       client.queue(transaction.name, packet)
 
-      
+      // const bedrockViewer = require('bedrock-viewer')
       // const viewer = bedrockViewer.bedrock(client, {port: 2223})
-      
     }
   })
 })()
