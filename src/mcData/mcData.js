@@ -176,7 +176,11 @@ module.exports = (version) => {
   mcData.attributesByName = sortArrayByKey(defaultAttributes, 'name')
   mcData.attributes = sortArrayByKey(defaultAttributes, 'resource')
 
-  if (version !== 'bedrock_1.20.61') return mcData
+  const versions = [
+    "bedrock_1.20.61",
+    "bedrock_1.20.71"
+  ]
+  if (!versions.includes(version)) return mcData
 
   for (const [file, options] of Object.entries(overwritingFields)) {
     const parsed = require(path.join(__dirname, version, file))

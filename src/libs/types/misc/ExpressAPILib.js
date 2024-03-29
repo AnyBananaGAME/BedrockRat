@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const { Vec3 } = require('vec3')
-const WebSocket = require('ws')
 const http = require('http')
 const bodyParser = require('body-parser')
 
@@ -62,43 +61,46 @@ module.exports = (client) => {
       console.log(`[http://localhost:${port}] ${new Date().toISOString()}`)
     })
 
-    const server = http.createServer(app)
-    const wss = new WebSocket.Server({ server })
-    wss.on('connection', (ws) => {
-      console.log('A client connected')
-      client.on('pre_player_auth_input', (event) => {
-        if (ws) {
-          const { x, y, z } = event.data.position
-          const { yaw, pitch } = event.data
-          ws.send(`${JSON.stringify({ type: 'position', position: { x, y, z } })}`)
-          ws.send(`${JSON.stringify({ type: 'head', yaw, pitch })}`)
-        }
-      })
-
-      ws.on('message', async (message) => {
-        message = Buffer.from(message).toString('utf-8')
-        console.log('Received:', message)
-        const data = JSON.parse(message)
-
-        switch (data.type) {
-          case 'getBlock': {
-            const pos = new Vec3(data.position.x, data.position.y, data.position.z)
-            const block = client.world.getBlock(pos)
-            ws.send(JSON.stringify({ type: 'blockResponse', block, position: data.position }))
-            break
+    if(client.viewer){
+      const WebSocket = require('ws')
+      const server = http.createServer(app)
+      const wss = new WebSocket.Server({ server })
+      wss.on('connection', (ws) => {
+        console.log('A client connected')
+        client.on('pre_player_auth_input', (event) => {
+          if (ws) {
+            const { x, y, z } = event.data.position
+            const { yaw, pitch } = event.data
+            ws.send(`${JSON.stringify({ type: 'position', position: { x, y, z } })}`)
+            ws.send(`${JSON.stringify({ type: 'head', yaw, pitch })}`)
           }
-          default:
-            break
-        }
+        })
+  
+        ws.on('message', async (message) => {
+          message = Buffer.from(message).toString('utf-8')
+          console.log('Received:', message)
+          const data = JSON.parse(message)
+  
+          switch (data.type) {
+            case 'getBlock': {
+              const pos = new Vec3(data.position.x, data.position.y, data.position.z)
+              const block = client.world.getBlock(pos)
+              ws.send(JSON.stringify({ type: 'blockResponse', block, position: data.position }))
+              break
+            }
+            default:
+              break
+          }
+        })
+  
+        ws.on('close', () => {
+          console.log('Client disconnected')
+        })
       })
-
-      ws.on('close', () => {
-        console.log('Client disconnected')
+      server.listen(3000, () => {
+        console.log('Server is running on port 3000')
       })
-    })
-    server.listen(3000, () => {
-      console.log('Server is running on port 3000')
-    })
+    }
   }
   client.once('spawn', () => {
     client.express()

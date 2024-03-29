@@ -1,4 +1,4 @@
-const version = '1.20.61'
+const version = '1.20.71'
 const { createClient } = require('bedrock-protocol')
 const { EventEmitter } = require('events')
 const config = require('./config.json')
