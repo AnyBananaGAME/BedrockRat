@@ -1,4 +1,5 @@
 # BedrockRat
+![](https://github.com/AnyBananaGAME/BedrockRat/assets/61703768/1ace27b9-f847-4130-ad5d-8d8d37fed3e0)
 
 BedrockRat is a Minecraft Bedrock bot(client) that does various tasks.
 
